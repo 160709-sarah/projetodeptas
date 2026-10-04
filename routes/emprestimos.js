@@ -54,4 +54,17 @@ router.put('/:id', (req, res) => {
 
     res.json({ mensagem: 'Devolução registrada com sucesso', emprestimo });
 });
+
+router.delete('/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const index = emprestimos.findIndex(e => e.id === id);
+
+
+    if (index === -1) {
+        return res.status(404).json({ error: 'Empréstimo não encontrado' });
+    }
+
+    const emprestimoRemovido = emprestimos.splice(index, 1);
+    res.json({ mensagem: 'Empréstimo removido com sucesso', emprestimo: emprestimoRemovido[0] });
+});
 module.exports = router;
