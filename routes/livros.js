@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
     res.json(livros);
 });
 
-module.exports = router;
+
 
 router.post('/', (req, res) => {
     const novoLivro = {
@@ -35,3 +35,17 @@ router.post('/', (req, res) => {
 
         res.json(livro);
     });
+
+    router.delete('/:id', (req, res) => {
+        const id = parseInt(req.params.id);
+        const index = livros.findIndex(l => l.id === id);
+
+        if(index === -1) {
+            return res.status(404).json({ erro: 'livro não encontrado'});
+        }
+
+        const livroRemovido = livros.splice(index, 1);
+        res.json({ mensagem: 'livro removido com sucesso', livro: livroRemovido[0] });
+    });
+
+    module.exports = router;
