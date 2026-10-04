@@ -1,10 +1,11 @@
 
-app.use(express.json());
+
 
 const express = require('express');
 const app = express();
 const PORT = 3000;
 
+app.use(express.json());
 
 const livrosRoutes = require('./routes/livros');
 app.use('/livros', livrosRoutes);

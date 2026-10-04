@@ -22,4 +22,16 @@ router.post('/', (req, res) => {
     res.status(201).json(novoLivro);
     });
 
-    
+    router.put('/:id', (req, res) => {
+        const id = parseInt(req.params.id);
+        const livro = livros.find(l => l.id === id);
+
+        if(!livro) {
+            return res.status(404).json({ erro: 'livro não encontrado' });
+        }
+
+        livro.titulo = req.body.titulo || livro.titulo;
+        livro.autor = req.body.autor || livro.autor;
+
+        res.json(livro);
+    });
