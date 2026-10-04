@@ -13,3 +13,6 @@ app.use('/livros', livrosRoutes);
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
+
+const exemplaresRoutes = require('./routes/exemplares');
+app.use('/exemplares', exemplaresRoutes);

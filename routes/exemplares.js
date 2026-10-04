@@ -1,0 +1,31 @@
+const express = require('express');
+const router = express.Router();
+
+let exemplares = [
+    {id: 1, livroId: 1, status: 'disponível', localizacao: 'Estante A3'},
+    { id: 2, livroId: 1, status: 'emprestado', localizacao: 'Estante A3'},
+];
+
+router.get('/', (req, res) => {
+    res.json(exemplares);
+});
+
+router.post('/', (req, res) => {
+    const { livroId, status, localizacao } = req.body;
+
+    if (!livroId || !status || !localizacao) {
+        return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
+    }
+
+    const novoExemplar = {
+        id: exemplares.length + 1,
+        livroId,
+        status,
+        localizacao,
+    };
+
+    exemplares.push(novoExemplar);
+    res.status(201).json(novoExemplar);
+});
+
+module.exports = router;
