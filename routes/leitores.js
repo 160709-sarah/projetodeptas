@@ -27,4 +27,22 @@ router.post('/', (req, res) => {
     res.status(201).json(novoLeitor);
 });
 
+router.put('/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const { nome, email } = req.body;
+
+    const leitor = leitores.find(l => l.id === id);
+
+    if (!leitor) {
+        return res.status(404).json({ error: 'Leitor não encontrado' });
+    }
+
+    if (nome) leitor.nome = nome;
+    if (email) leitor.email = email;
+
+    res.json(leitor);
+});
+
+
+
 module.exports = router;
