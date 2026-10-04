@@ -37,4 +37,21 @@ router.post('/', (req, res) => {
     emprestimos.push(novoEmprestimo);
     res.status(201).json(novoEmprestimo);
 });
+
+router.put('/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const emprestimo = emprestimos.find(e => e.id === id);
+
+    if (!emprestimo) {
+        return res.status(404).json({ error: 'Empréstimo não encontrado' });
+}
+
+    if (emprestimo.dataDevolucao !== null) {
+        return res.status(400).json({ error: 'Empréstimo já foi devolvido' });
+    }
+
+    emprestimo.dataDevolucao = new Date().toISOString().split('T')[0];
+
+    res.json({ mensagem: 'Devolução registrada com sucesso', emprestimo });
+});
 module.exports = router;
