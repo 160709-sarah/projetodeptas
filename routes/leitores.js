@@ -43,6 +43,16 @@ router.put('/:id', (req, res) => {
     res.json(leitor);
 });
 
+router.delete('/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const index = leitores.findIndex(l => l.id === id);
 
+    if (index === -1) {
+        return res.status(404).json({ error: 'Leitor não encontrado' });
+    }
+
+    const leitorRemovido = leitores.splice(index, 1);
+    res.json({ mensagem: 'Leitor removido com sucesso', leitor: leitorRemovido[0] });
+}); 
 
 module.exports = router;
