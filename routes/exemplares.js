@@ -28,4 +28,21 @@ router.post('/', (req, res) => {
     res.status(201).json(novoExemplar);
 });
 
+router.put('/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const { livroId, status, localizacao } = req.body;
+
+    const exemplar = exemplares.find(e => e.id === id);
+
+    if (!exemplar) {
+        return res.status(404).json({ error: 'Exemplar não encontrado' });
+    }
+
+    if (livroId) exemplar.livroId = livroId;
+    if (status) exemplar.status = status;
+    if (localizacao) exemplar.localizacao = localizacao;
+
+    res.json(exemplar);
+});
+
 module.exports = router;
