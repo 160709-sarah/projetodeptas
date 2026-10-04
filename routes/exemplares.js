@@ -45,4 +45,15 @@ router.put('/:id', (req, res) => {
     res.json(exemplar);
 });
 
+router.delete('/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const index = exemplares.findIndex(e => e.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ error: 'Exemplar não encontrado' });
+    }
+
+    const exemplarRemovido = exemplares.splice(index, 1);
+    res.json({ mensagem: 'Exemplar removido com sucesso', exemplar: exemplarRemovido[0] });
+});
 module.exports = router;
