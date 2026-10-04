@@ -16,3 +16,6 @@ app.listen(PORT, () => {
 
 const exemplaresRoutes = require('./routes/exemplares');
 app.use('/exemplares', exemplaresRoutes);
+
+const leitoresRoutes = require('./routes/leitores');
+app.use('/leitores', leitoresRoutes);
