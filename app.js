@@ -19,3 +19,6 @@ app.use('/exemplares', exemplaresRoutes);
 
 const leitoresRoutes = require('./routes/leitores');
 app.use('/leitores', leitoresRoutes);
+
+const emprestimosRoutes = require('./routes/emprestimos');
+app.use('/emprestimos', emprestimosRoutes);
