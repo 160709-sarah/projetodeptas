@@ -11,3 +11,15 @@ router.get('/', (req, res) => {
 });
 
 module.exports = router;
+
+router.post('/', (req, res) => {
+    const novoLivro = {
+        id: livros.length + 1,
+        titulo: req.body.titulo,
+        autor: req.body.autor
+    };
+    livros.push(novoLivro);
+    res.status(201).json(novoLivro);
+    });
+
+    
