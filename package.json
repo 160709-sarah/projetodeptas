@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "db:up": "docker start projetodeptas || docker run -d --name projetodeptas -p 127.0.0.1:27017:27017 -v projetodeptas-data:/data/db mongo:8",
+    "db:down": "docker stop projetodeptas",
+    "db:logs": "docker logs -f projetodeptas",
+    "db:reset": "docker rm -f projetodeptas; docker volume rm projetodeptas-data",
+    "predev": "npm run db:up",
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js"
   },
   "repository": {
     "type": "git",
